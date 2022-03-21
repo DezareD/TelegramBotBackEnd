@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Serilog;
+using System.Configuration;
 using TelegramBot.Data;
 
 namespace TelegramBot
@@ -20,8 +21,8 @@ namespace TelegramBot
 
         public TelegramBotDataBaseConnection CreateDbContext(string[] args)
         {
-            var builder = new DbContextOptionsBuilder<TelegramBotDataBaseConnection>().UseMySql("server=localhost;uid=DezareD;pwd=N1vs1nq12;database=telegramBot_test;Allow User Variables=true",
-                        ServerVersion.AutoDetect("server=localhost;uid=DezareD;pwd=N1vs1nq12;database=telegramBot_test;Allow User Variables=true"));
+            var builder = new DbContextOptionsBuilder<TelegramBotDataBaseConnection>().UseMySql(ConfigurationManager.AppSettings.Get("mysqlConnector"),
+                        ServerVersion.AutoDetect(ConfigurationManager.AppSettings.Get("mysqlConnector")));
 
 
             return new TelegramBotDataBaseConnection(builder.Options);
@@ -31,8 +32,8 @@ namespace TelegramBot
         {
             try
             {
-                optionsBuilder.UseMySql("server=localhost;uid=DezareD;pwd=N1vs1nq12;database=telegramBot_test;Allow User Variables=true",
-                        ServerVersion.AutoDetect("server=localhost;uid=DezareD;pwd=N1vs1nq12;database=telegramBot_test;Allow User Variables=true"));
+                optionsBuilder.UseMySql(ConfigurationManager.AppSettings.Get("mysqlConnector"),
+                        ServerVersion.AutoDetect(ConfigurationManager.AppSettings.Get("mysqlConnector")));
             }
             catch
             {

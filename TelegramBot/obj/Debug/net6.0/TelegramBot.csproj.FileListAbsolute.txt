@@ -54,3 +54,5 @@ C:\Users\Fearp\source\repos\TelegramBot\TelegramBot\bin\Debug\net6.0\MySqlConnec
 C:\Users\Fearp\source\repos\TelegramBot\TelegramBot\bin\Debug\net6.0\Pomelo.EntityFrameworkCore.MySql.dll
 C:\Users\Fearp\source\repos\TelegramBot\TelegramBot\bin\Debug\net6.0\Telegram.Bot.Extensions.dll
 C:\Users\Fearp\source\repos\TelegramBot\TelegramBot\bin\Debug\net6.0\Telegram.Bot.Extensions.Polling.dll
+C:\Users\Fearp\source\repos\TelegramBot\TelegramBot\bin\Debug\net6.0\Microsoft.Extensions.Configuration.dll
+C:\Users\Fearp\source\repos\TelegramBot\TelegramBot\bin\Debug\net6.0\TelegramBot.dll.config

@@ -9,6 +9,8 @@ using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
 using TelegramBot.Data;
+using System.Configuration;
+using System.Collections.Specialized;
 
 namespace TelegramBot
 {
@@ -22,14 +24,14 @@ namespace TelegramBot
 
         public static void Main(string[] args)
         {
-            BotFlag = args.Length != 0 ? args[0] : "part1";
+            BotFlag = ConfigurationManager.AppSettings.Get("botPart");
             /* CONFIGURATION */
 
             _serviceProvider = new ServiceCollection()
                 .AddDbContext<TelegramBotDataBaseConnection>(act =>
                 {
-                    act.UseMySql("server=localhost;uid=DezareD;pwd=N1vs1nq12;database=telegramBot_test;Allow User Variables=true",
-                        ServerVersion.AutoDetect("server=localhost;uid=DezareD;pwd=N1vs1nq12;database=telegramBot_test;Allow User Variables=true"));
+                    act.UseMySql(ConfigurationManager.AppSettings.Get("mysqlConnector"),
+                        ServerVersion.AutoDetect(ConfigurationManager.AppSettings.Get("mysqlConnector")));
                 })
                 .AddTransient<IApplicationServices, ApplicationServices>()
                 .BuildServiceProvider(new ServiceProviderOptions()
@@ -42,7 +44,7 @@ namespace TelegramBot
 
             _applicationServices = (IApplicationServices)_serviceScope.ServiceProvider.GetRequiredService(typeof(IApplicationServices));
 
-            TelegramBotClient client = new TelegramBotClient("5128846499:AAEfY3se9PbezH9YWmOL1lco2e0O4SqkBL4");
+            TelegramBotClient client = new TelegramBotClient(ConfigurationManager.AppSettings.Get("botToken"));
 
             /* START APPLICATION RECIVER */
 
@@ -89,8 +91,6 @@ namespace TelegramBot
             }
 
         }
-
-        
 
         public static Task HandleErrorAsync(ITelegramBotClient botClient, Exception exception, CancellationToken cancellationToken)
         {
